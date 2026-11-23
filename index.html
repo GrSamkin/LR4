@@ -610,8 +610,8 @@ ul{ margin:0; padding:0; list-style:none; }
 
 .catalog{
   display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(258px,1fr));
-  gap:22px;
+  grid-template-columns:repeat(3,1fr);
+  gap:26px;
 }
 
 .card{
@@ -640,7 +640,9 @@ ul{ margin:0; padding:0; list-style:none; }
 
 .card__preview{
   position:relative;
-  height:168px;
+  aspect-ratio:3 / 4;
+  height:auto;
+  max-height:540px;
   display:grid;
   place-items:center;
   overflow:hidden;
@@ -649,6 +651,8 @@ ul{ margin:0; padding:0; list-style:none; }
   content:'';
   position:absolute;
   inset:0;
+  z-index:2;
+  pointer-events:none;
   background:radial-gradient(circle at 28% 18%, rgba(255,255,255,.18), transparent 62%);
 }
 .card__preview .icon{
@@ -662,6 +666,18 @@ ul{ margin:0; padding:0; list-style:none; }
 }
 .card:hover .card__preview .icon{ transform:scale(1.08) rotate(-4deg); }
 
+.card__preview img{
+  position:relative;
+  z-index:1;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  display:block;
+  transition:transform .35s var(--ease);
+}
+.card:hover .card__preview img{ transform:scale(1.06); }
+
 .preview--trainers{ background:linear-gradient(135deg,#FF3D2E,#6E0E05); }
 .preview--gear{     background:linear-gradient(135deg,#FFB800,#7A4E00); }
 .preview--handles{  background:linear-gradient(135deg,#5A6270,#14161B); }
@@ -672,18 +688,18 @@ ul{ margin:0; padding:0; list-style:none; }
   display:flex;
   flex-direction:column;
   flex:1;
-  padding:18px 18px 20px;
+  padding:22px 22px 24px;
 }
 .card__title{
-  font-size:17px;
+  font-size:19px;
   letter-spacing:.03em;
-  margin-bottom:8px;
+  margin-bottom:10px;
 }
 .card__desc{
   color:var(--muted);
-  font-size:13.5px;
-  line-height:1.5;
-  margin-bottom:18px;
+  font-size:14.5px;
+  line-height:1.55;
+  margin-bottom:20px;
   flex:1;
 }
 .card__foot{
@@ -694,21 +710,21 @@ ul{ margin:0; padding:0; list-style:none; }
 }
 .card__price{
   font-family:'Oswald',sans-serif;
-  font-size:18px;
+  font-size:20px;
   font-weight:600;
   color:var(--accent-2);
   white-space:nowrap;
 }
 .card__btn{
-  min-height:44px;
-  min-width:44px;
-  padding:0 16px;
-  border-radius:9px;
+  min-height:46px;
+  min-width:46px;
+  padding:0 20px;
+  border-radius:10px;
   border:1px solid rgba(255,61,46,.5);
   background:rgba(255,61,46,.1);
   color:var(--white);
   font-family:'Oswald',sans-serif;
-  font-size:13px;
+  font-size:14px;
   font-weight:600;
   letter-spacing:.06em;
   text-transform:uppercase;
@@ -1365,7 +1381,7 @@ ul{ margin:0; padding:0; list-style:none; }
    13. АДАПТИВНОСТЬ
    ============================================================ */
 @media (max-width:1200px){
-  .catalog{ grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); }
+  .catalog{ grid-template-columns:repeat(3,1fr); }
   .advantages{ grid-template-columns:repeat(2,1fr); }
 }
 
@@ -1424,6 +1440,9 @@ ul{ margin:0; padding:0; list-style:none; }
 
   .cta__inner{ grid-template-columns:1fr; }
 
+  .catalog{ grid-template-columns:repeat(2,1fr); }
+  .card__preview{ max-height:560px; }
+
   .footer__grid{
     grid-template-columns:1fr 1fr;
     gap:32px;
@@ -1436,8 +1455,8 @@ ul{ margin:0; padding:0; list-style:none; }
     grid-template-columns:repeat(2,1fr);
     gap:18px 14px;
   }
-  .catalog{ grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); }
-  .card__preview{ height:148px; }
+  .catalog{ grid-template-columns:repeat(2,1fr); }
+  .card__preview{ aspect-ratio:3 / 4; height:auto; max-height:440px; }
   .timer__cell{ min-width:60px; padding:8px 6px; }
   .timer__num{ font-size:22px; }
   .review{ padding:28px 22px; }
@@ -1448,7 +1467,7 @@ ul{ margin:0; padding:0; list-style:none; }
   .hero__cta .btn{ width:100%; }
   .advantages{ grid-template-columns:1fr; }
   .catalog{ grid-template-columns:1fr; }
-  .card__preview{ height:160px; }
+  .card__preview{ aspect-ratio:3 / 4; height:auto; max-height:460px; }
   .footer__grid{ grid-template-columns:1fr; }
   .timer{ flex-wrap:wrap; }
   .timer__cell{ flex:1 1 calc(50% - 5px); }
@@ -1730,7 +1749,7 @@ ul{ margin:0; padding:0; list-style:none; }
         <!-- 1 -->
         <article class="card" data-cat="trainers" style="--i:0">
           <div class="card__preview preview--trainers">
-            <svg class="icon" aria-hidden="true"><use href="#i-dumbbell"/></svg>
+            <img src="img/stol.jpg" alt="Армстол PRO TABLE — регулируемый стол для армрестлинга" loading="lazy">
           </div>
           <div class="card__body">
             <h3 class="card__title">Армстол PRO TABLE</h3>
@@ -1764,7 +1783,7 @@ ul{ margin:0; padding:0; list-style:none; }
         <!-- 3 -->
         <article class="card" data-cat="gear" style="--i:2">
           <div class="card__preview preview--gear">
-            <svg class="icon" aria-hidden="true"><use href="#i-kettlebell"/></svg>
+            <img src="img/girya.jpg" alt="Гиря чугунная 24 кг" loading="lazy">
           </div>
           <div class="card__body">
             <h3 class="card__title">Гиря чугунная 24 кг</h3>
